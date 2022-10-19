@@ -33,11 +33,11 @@ Aby wykonać testy:
 ```
 python3 -m unittest
 ```
-Testy powinny być się wywalić z errorem:
+Testy będą "czerwone" z errorem:
 *__init__() takes 1 positional argument but 3 were given'*
 
 Proszę dopisać kod w pliku Konto.py tak aby testy przechodziły.
-**Proszę zrobić push swojej zmiany oraz stworzyć PR do brancha main przypisać mnie (konrad-sol) do review.**
+**Proszę zrobić push swojej zmiany oraz stworzyć PR do brancha main oraz przypisać mnie (konrad-sol) do review.**
 
 Proszę zastanowić się co można poprawić w naszym teście.
 Proszę zastanowić się nad testem do kolejnego feature.
@@ -58,12 +58,14 @@ Musimy dodać funkcjonalność która sprawdzi czy podany PESEL ma dokładnie 11
 Feature 4:
 By zwiększyć sprzedaż zakładanych kont zespół sprzedaży rozpoczął akcje promocyjną.
 Jeżeli przy zakładaniu konta użytkownik poda kod rabatowy w postaci PROM_XYZ (gdzie XYZ to dowolne znaki) do nowo utworzonego konta dodajemy 50zł. Kod rabatowy nie jest obowiązkowy do założenia konta.
+
 *Podpowiedź*:
 Jeżeli zmienna nie jest obowiązkowa – w definicji konstruktora możemy ustawić default na None.
+
 Proszę skupić się możliwych scenariuszach, napisać testy i na końcu dokonać zmian w programie.
 
 Feature 5:
-W rezultacie akcji promocyjnej konto było bardzo popularne wśród seniorów. Bank jest teraz na skraju bankructwa. Musimy ograniczyć promocję – od teraz tylko osoby urodzone po roku 1960 roku życia otrzymają 50zł przy zakładaniu konta.
+W rezultacie akcji promocyjnej konto było bardzo popularne wśród seniorów. Bank jest teraz na skraju bankructwa. Musimy ograniczyć promocję – od teraz tylko osoby urodzone po roku 1960 roku życia otrzymają 50zł przy zakładaniu konta z uzyciem kodu.
 
 Podpowiedź:
 Znów, proszę najpierw skupić się na testach.
