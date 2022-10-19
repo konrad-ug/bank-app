@@ -32,7 +32,7 @@ Aby wykonać testy:
 python3 -m unittest
 ```
 Testy powinny być się wywalić z errorem:
-*'Konto' object has no attribute 'imie'*
+*__init__() takes 1 positional argument but 3 were given'*
 
 Proszę dopisać kod w pliku Konto.py tak aby testy przechodziły.
 **Proszę zrobić push swojej zmiany oraz stworzyć PR do brancha main przypisać mnie (konrad-sol) do review.**
@@ -63,7 +63,7 @@ Proszę skupić się możliwych scenariuszach, napisać testy i na końcu dokona
 Feature 5:
 W rezultacie akcji promocyjnej konto było bardzo popularne wśród seniorów. Bank jest na skraju bankructwa. Musimy ograniczyć promocję – od teraz tylko osoby urodzone po roku 1960 roku życia otrzymają 50zł przy zakładaniu konta.
 Podpowiedź:
-Znów proszę najpierw skupić się na testach.
+Znów, proszę najpierw skupić się na testach.
 Może warto dodatkową logikę przenieść do oddzielnej metody?
 
 Po zakończeniu proszę wystawić PR i przypisać mnie do review.
