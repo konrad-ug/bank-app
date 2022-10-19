@@ -4,7 +4,6 @@ Proszę stworzyć brancha roboczego i tam trzymać swoje zmiany.
 ```
 git checkout -b feature_1
 ```
-gdy zadanie będą skończone proszę zrobić PR do main brancha i przypisać mnie (konrad-sol).
 
 Zadanie:
 Jesteś osobą odpowiedzialną za stworzenie corowej funkcjonalności aplikacji bankowej.
