@@ -13,20 +13,20 @@ Jesteś osobą odpowiedzialną za stworzenie corowej funkcjonalności aplikacji 
 Pierwszym zadaniem jest stworzenie funkcjonalności zakładania konta bankowego. W celu zoptymalizowania procesu developmentu wybierasz metodologie TDD.
 
 Zaimplementuj poniże funkcjonalności używając TDD. 
+
 Feature 1:
 System powinien umożliwiać stworzenie osobistego konta bankowego.
 Konto powinno posiadać następujące parametry:
-- imię i nazwisko właściciela (podawane w trakcie tworzenia konta, na chwile obecną nie są to pola obowiązkowe)
+- imię i nazwisko właściciela (podawane w trakcie tworzenia konta)
 - saldo (początkowe saldo dla wszystkich kont wynosi 0)
 
 *Podpowiedź*:
-Proszę sklonować swoje repozytorium do folderu:
+Proszę sklonować swoje repozytorium:
 ```
 git clone nazwa_repo
 ```
 Proszę stworzyć swojego feature brancha
 ```
-cd bank-app
 git checkout -b feature_1
 ```
 Aby wykonać testy:
@@ -68,9 +68,11 @@ Feature 5:
 W rezultacie akcji promocyjnej konto było bardzo popularne wśród seniorów. Bank jest teraz na skraju bankructwa. Musimy ograniczyć promocję – od teraz tylko osoby urodzone po roku 1960 roku życia otrzymają 50zł przy zakładaniu konta z uzyciem kodu.
 
 Podpowiedź:
+Rok urodzenia ukryty jest w numerze PESEL.
+
 Znów, proszę najpierw skupić się na testach.
 
-Może warto dodatkową logikę przenieść do oddzielnej metody?
+Podpowiedź 2: Może warto dodatkową logikę przenieść do oddzielnej metody?
 
 Po zakończeniu proszę wystawić PR i przypisać mnie do review.
 By uzyskać pełną ilość punktów (10) PR powinien być wsyatwiony do 26.10.2022 do godziny 23:00.
