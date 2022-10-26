@@ -16,7 +16,7 @@ class TestKsiegowaniePrzelewow(unittest.TestCase):
     def test_przelew_wychodzacy_wystarczajace_srodki(self):
         konto = Konto(self.imie, self.nazwisko, self.pesel)
         konto.saldo = 105
-        konto.zaksieguj_przelew_wychodzacy(100)
+        konto.zaksieguj_przelew_wychodzacy(100) 
         self.assertEqual(konto.saldo, 5)
 
     def test_przelew_wychodzacy_niewystarczajace_srodki(self):
@@ -32,13 +32,13 @@ class TestKsiegowaniePrzelewow(unittest.TestCase):
         konto.zaksieguj_przelew_przychodzacy(10.25) 
         self.assertEqual(konto.saldo, 760.25)
 
-    # def test_seria_przelewow_konto_firmowe(self):
-    #     konto = KontoFirmowe("Kebabex", "8461627563")
-    #     konto.zaksieguj_przelew_przychodzacy(1000)
-    #     konto.zaksieguj_przelew_wychodzacy(250) #saldo po operacji 750
-    #     konto.zaksieguj_przelew_wychodzacy(1500) #saldo po operacji 750
-    #     konto.zaksieguj_przelew_przychodzacy(10.25) 
-    #     self.assertEqual(konto.saldo, 760.25)
+    def test_seria_przelewow_konto_firmowe(self):
+        konto = KontoFirmowe("Kebabex", "8461627563")
+        konto.zaksieguj_przelew_przychodzacy(1000)
+        konto.zaksieguj_przelew_wychodzacy(250) #saldo po operacji 750
+        konto.zaksieguj_przelew_wychodzacy(1500) #saldo po operacji 750
+        konto.zaksieguj_przelew_przychodzacy(10.25) 
+        self.assertEqual(konto.saldo, 760.25)
 
     
 

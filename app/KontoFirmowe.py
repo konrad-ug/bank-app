@@ -1,6 +1,8 @@
 from app.Konto import Konto
 
 class KontoFirmowe(Konto):
+    oplata_za_przelew_ekspresowy = 5
+
     def __init__(self, nazwa_firmy, nip):
         self.nazwa_firmy = nazwa_firmy
         self.saldo = 0
