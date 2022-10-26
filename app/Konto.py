@@ -1,15 +1,10 @@
 import datetime
 
 class Konto:
-    typy_operacji = {
-        'przychodzacy': 'przelew przychodzący',
-        'wychodzacy': 'przelew wychodzacy'
-    }
     def __init__(self, imie, nazwisko, pesel, kod_promocyjny = None):
         self.imie = imie
         self.nazwisko = nazwisko
         self.saldo = 0
-        historia = []
         self.pesel = pesel if self.czy_poprawny_pesel(pesel) else "Nieporpwany pesel!"
         if self.czy_promocja_dziala(pesel, kod_promocyjny):
             self.saldo = 50
@@ -35,7 +30,7 @@ class Konto:
                 return True
         return False
 
-    def zaksieguj_przelew_przychodzacy(self, kwota: int, tytul):
+    def zaksieguj_przelew_przychodzacy(self, kwota: int):
         self.saldo += kwota
 
     def zaksieguj_przelew_wychodzacy(self, kwota: int):
