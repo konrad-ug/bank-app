@@ -1,4 +1,7 @@
+import datetime
+
 class Konto:
+    oplata_za_przelew_ekspresowy = 1
     def __init__(self, imie, nazwisko, pesel, kod_promocyjny = None):
         self.imie = imie
         self.nazwisko = nazwisko
@@ -27,3 +30,15 @@ class Konto:
             if kod_promocyjny[0:5] == "PROM_" and len(kod_promocyjny) == 8:
                 return True
         return False
+
+    def zaksieguj_przelew_przychodzacy(self, kwota: int):
+        self.saldo += kwota
+
+    def zaksieguj_przelew_wychodzacy(self, kwota: int):
+        if self.saldo >= kwota:
+            self.saldo -= kwota
+
+    def zaksieguj_przelew_ekspresowy(self, kwota: int):
+        if self.saldo >= kwota:
+            self.saldo -= kwota
+            self.saldo -= self.oplata_za_przelew_ekspresowy
