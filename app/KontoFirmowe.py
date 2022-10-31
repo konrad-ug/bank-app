@@ -10,3 +10,6 @@ class KontoFirmowe(Konto):
 
     def czy_poprawny_nip(self, nip):
         return len(nip) == 10
+
+    def sprawdzam(self):
+        pass
