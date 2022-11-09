@@ -6,6 +6,7 @@ class Konto:
         self.imie = imie
         self.nazwisko = nazwisko
         self.saldo = 0
+        self.historia = []
         self.pesel = pesel if self.czy_poprawny_pesel(pesel) else "Nieporpwany pesel!"
         if self.czy_promocja_dziala(pesel, kod_promocyjny):
             self.saldo = 50
@@ -33,12 +34,16 @@ class Konto:
 
     def zaksieguj_przelew_przychodzacy(self, kwota: int):
         self.saldo += kwota
+        self.historia.append(kwota)
 
     def zaksieguj_przelew_wychodzacy(self, kwota: int):
         if self.saldo >= kwota:
             self.saldo -= kwota
+            self.historia.append(-kwota)
 
     def zaksieguj_przelew_ekspresowy(self, kwota: int):
         if self.saldo >= kwota:
             self.saldo -= kwota
+            self.historia.append(-kwota)
             self.saldo -= self.oplata_za_przelew_ekspresowy
+            self.historia.append(-self.oplata_za_przelew_ekspresowy)

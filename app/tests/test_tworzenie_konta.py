@@ -42,4 +42,3 @@ class TestCreateBankAccount(unittest.TestCase):
         konto = Konto(self.imie, self.nazwisko, "01292909876", "PROM_123")
         self.assertEqual(konto.saldo, 50)  
 
-
