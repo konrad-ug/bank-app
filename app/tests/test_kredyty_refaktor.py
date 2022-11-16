@@ -1,5 +1,5 @@
 import unittest
-
+from parameterized import parameterized
 from ..Konto import Konto
 
 class TestKredytRefaktor(unittest.TestCase):
@@ -12,12 +12,19 @@ class TestKredytRefaktor(unittest.TestCase):
     def setUp(self):
         self.konto = Konto(self.imie, self.nazwisko, self.pesel)
 
-    def test_3_przychodzace_przelewy(self):
-        self.konto.historia = [-100, 100, 100, 100]
-        czy_przyznany = self.konto.zaciagnij_kredyt(500)
-        self.assertTrue(czy_przyznany)
-        self.assertEqual(self.konto.saldo, 500)
+    @parameterized([
+        ([-100, 100, 100, 100], 500, True, 500),
+        ([-100, 100, -100, 100, 1000], 700, True, 700),
+        ([-100, 100, -100, 100, 1000], 700, True, 700),
+    ])
+    def test_3_przychodzace_przelewy(self, historia, kwota, oczekiwany_wynik, saldo):
+        self.konto.historia = historia
+        czy_przyznany = self.konto.zaciagnij_kredyt(kwota)
+        self.assertEqual(czy_przyznany, oczekiwany_wynik)
+        self.assertEqual(self.konto.saldo, saldo)
     
+
+
     def test_3_mieszane_przelewy(self):
         self.konto.historia = [-100, 100, -100, 100]
         czy_przyznany = self.konto.zaciagnij_kredyt(500)

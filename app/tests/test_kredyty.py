@@ -7,16 +7,32 @@ class TestKredyt(unittest.TestCase):
     nazwisko = "Januszewski"
     pesel = "66092909876"
 
-    def test_3_przychodzace_przelewy(self):
-        konto = Konto(self.imie, self.nazwisko, self.pesel)
-        konto.historia = [-100, 100, 100, 100]
-        czy_przyznany = konto.zaciagnij_kredyt(500)
+    def setUp(self):
+        self.konto = Konto(self.imie, self.nazwisko, self.pesel)
+
+    def test_3_przychodzace_przelewy(self):     
+        self.konto.historia = [-100, 100, 100, 100]
+        czy_przyznany = self.konto.zaciagnij_kredyt(500)
         self.assertTrue(czy_przyznany)
-        self.assertEqual(konto.saldo, 500)
-    
+        self.assertEqual(self.konto.saldo, 500)
+
     def test_3_mieszane_przelewy(self):
         konto = Konto(self.imie, self.nazwisko, self.pesel)
         konto.historia = [-100, 100, -100, 100]
+        czy_przyznany = konto.zaciagnij_kredyt(500)
+        self.assertFalse(czy_przyznany)
+        self.assertEqual(konto.saldo, 0)
+
+    def test_2_przychodzace_przelewy(self):
+        konto = Konto(self.imie, self.nazwisko, self.pesel)
+        konto.historia = [100, 1000]
+        czy_przyznany = konto.zaciagnij_kredyt(500)
+        self.assertFalse(czy_przyznany)
+        self.assertEqual(konto.saldo, 0)
+
+    def test_0_przelewow(self):
+        konto = Konto(self.imie, self.nazwisko, self.pesel)
+        konto.historia = [100, 1000]
         czy_przyznany = konto.zaciagnij_kredyt(500)
         self.assertFalse(czy_przyznany)
         self.assertEqual(konto.saldo, 0)
@@ -35,9 +51,4 @@ class TestKredyt(unittest.TestCase):
         self.assertFalse(czy_przyznany)
         self.assertEqual(konto.saldo, 0)
 
-    def test_2_przychodzace_przelewy(self):
-        konto = Konto(self.imie, self.nazwisko, self.pesel)
-        konto.historia = [100, 1000]
-        czy_przyznany = konto.zaciagnij_kredyt(500)
-        self.assertFalse(czy_przyznany)
-        self.assertEqual(konto.saldo, 0)
+

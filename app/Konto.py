@@ -53,7 +53,7 @@ class Konto:
             return False
         if self.historia[-3] > 0 and self.historia[-2] > 0 and self.historia[-1] > 0:
             self.saldo += kwota
-            return True
+            return True     
         if len(self.historia) < 5:
             return False
         if sum(self.historia[-5:]) <= kwota:
