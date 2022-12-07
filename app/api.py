@@ -8,9 +8,23 @@ app = Flask(__name__)
 def stworz_konto():
     dane = request.get_json()
     print(f"Request o stworzenie konta z danymi: {dane}")
+    if RejestrKont.wyszukaj_konto_z_peselem(dane["pesel"]) != None:
+        return jsonify("Konto z podanym peselem juz istnieje"), 400
     konto = Konto(dane["imie"], dane["nazwisko"], dane["pesel"])
     RejestrKont.dodaj_konto(konto)
     return jsonify("Konto stworzone"), 201
+
+@app.route("/konta/konto/<pesel>", methods=['PUT'])
+def aktualizuj_konto(pesel):
+    dane = request.get_json()
+    print(f"Request o update konta z danymi: {dane}")
+    konto = RejestrKont.wyszukaj_konto_z_peselem(pesel)
+    print("konto znalezione")
+    konto.imie = dane["imie"] if "imie" in dane else konto.imie
+    konto.nazwisko = dane["nazwisko"] if "nazwisko" in dane else konto.nazwisko
+    konto.pesel = dane["pesel"] if "pesel" in dane else konto.pesel
+    konto.saldo = dane["saldo"] if "saldo" in dane else konto.saldo
+    return jsonify("Update zakończony powodzeniem"), 200
 
 @app.route("/konta/ile_kont", methods=['GET'])
 def ile_kont():
@@ -22,3 +36,9 @@ def wyszukaj_konto_z_peselem(pesel):
     konto = RejestrKont.wyszukaj_konto_z_peselem(pesel)
     print(konto)
     return jsonify(imie=konto.imie, nazwisko=konto.nazwisko,saldo=konto.saldo), 200
+
+@app.route("/konta/konto/<pesel>", methods=['DELETE'])
+def usun_konto_z_peselem(pesel):
+    print(f"Request o usuniecie z peselem: {pesel}")
+    konto = RejestrKont.usun_konto_z_peselem(pesel)
+    return jsonify("konto usuniete"), 202

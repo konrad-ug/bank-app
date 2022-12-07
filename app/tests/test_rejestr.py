@@ -18,12 +18,12 @@ class TestRejestr(unittest.TestCase):
         konto1 = Konto(self.imie + "ddd", self.nazwisko, self.pesel)
         RejestrKont.dodaj_konto(konto)
         RejestrKont.dodaj_konto(konto1)
-        self.assertEqual(RejestrKont.ile_kont(), 2)
+        self.assertEqual(RejestrKont.ile_kont(), 3)
 
     def test_2_dodawania_drugie_konta(self):
         konto = Konto(self.imie, self.nazwisko, self.pesel)
         RejestrKont.dodaj_konto(konto)
-        self.assertEqual(RejestrKont.ile_kont(), 3)
+        self.assertEqual(RejestrKont.ile_kont(), 4)
 
     @classmethod
     def tearDownClass(cls):
