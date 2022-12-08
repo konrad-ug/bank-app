@@ -2,6 +2,7 @@ import unittest
 
 from ..Konto import Konto
 from ..KontoFirmowe import KontoFirmowe
+from unittest.mock import patch
 
 class TestCreateBankAccount(unittest.TestCase):
     imie = "darek"
@@ -21,7 +22,9 @@ class TestCreateBankAccount(unittest.TestCase):
         konto.zaksieguj_przelew_wychodzacy(100)
         self.assertListEqual(konto.historia, [-100])
 
-    def test_zapisywanie_przelewu_wkspresowego_konto_firmowe(self):
+    @patch('app.KontoFirmowe.KontoFirmowe.czy_nip_istnieje_w_gov')
+    def test_zapisywanie_przelewu_wkspresowego_konto_firmowe(self, mock_czy_nip_istnieje_w_gov):
+        mock_czy_nip_istnieje_w_gov.return_value = True
         konto = KontoFirmowe(self.nazwa_firmy, self.nip)
         konto.saldo = 1000
         konto.zaksieguj_przelew_ekspresowy(100)

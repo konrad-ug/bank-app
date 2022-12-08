@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 
 from ..KontoFirmowe import KontoFirmowe
 
@@ -6,7 +7,9 @@ class TestTworzenieKontaFirmowego(unittest.TestCase):
     nazwa_firmy = "Januszex sp. z o.o"
     nip = "8461627563"
 
-    def test_tworzenie_konta(self):
+    @patch('app.KontoFirmowe.KontoFirmowe.czy_nip_istnieje_w_gov')
+    def test_tworzenie_konta(self, mock_czy_nip_istnieje_w_gov):
+        mock_czy_nip_istnieje_w_gov.return_value = True
         pierwsze_konto = KontoFirmowe(self.nazwa_firmy, self.nip)
         self.assertEqual(pierwsze_konto.nazwa_firmy, self.nazwa_firmy, "Nazwa firmy nie została zapisane!")
         self.assertEqual(pierwsze_konto.saldo, 0, "Saldo nie jest zerowe!")

@@ -1,4 +1,5 @@
 import unittest
+from unittest.mock import patch
 
 from ..Konto import Konto
 from ..KontoFirmowe import KontoFirmowe
@@ -20,7 +21,9 @@ class TestKsiegowaniePrzelewow(unittest.TestCase):
         konto.zaksieguj_przelew_ekspresowy(300)
         self.assertEqual(konto.saldo, 200)
 
-    def test_udany_przelew_ekspresowy_konto_firmowe(self):
+    @patch('app.KontoFirmowe.KontoFirmowe.czy_nip_istnieje_w_gov')
+    def test_udany_przelew_ekspresowy_konto_firmowe(self, mock_czy_nip_istnieje_w_gov):
+        mock_czy_nip_istnieje_w_gov.return_value = True
         konto = KontoFirmowe("Kebabex ltd.", "8461627563")
         konto.saldo = 1000
         konto.zaksieguj_przelew_ekspresowy(300)
