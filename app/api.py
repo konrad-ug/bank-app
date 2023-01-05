@@ -28,13 +28,15 @@ def aktualizuj_konto(pesel):
 
 @app.route("/konta/ile_kont", methods=['GET'])
 def ile_kont():
-    return f"Ilość kont w rejestrze {RejestrKont.ile_kont()}", 200
+    return {"ilosc_kont_w_rejestrze":RejestrKont.ile_kont()},200
 
 @app.route("/konta/konto/<pesel>", methods=['GET'])
 def wyszukaj_konto_z_peselem(pesel):
     print(f"Request o konto z peselem: {pesel}")
     konto = RejestrKont.wyszukaj_konto_z_peselem(pesel)
     print(konto)
+    if (konto == None):
+        return {"Konto nie zostało znalezione"}, 404
     return jsonify(imie=konto.imie, nazwisko=konto.nazwisko,saldo=konto.saldo), 200
 
 @app.route("/konta/konto/<pesel>", methods=['DELETE'])
