@@ -22,3 +22,9 @@ class RejestrKont():
         for konto in cls.lista:
             if konto.pesel == pesel:
                 cls.lista.remove(konto)
+        return True
+
+    @classmethod
+    def wyczysc_rejestr(cls):
+        cls.lista = []
+        return cls.lista

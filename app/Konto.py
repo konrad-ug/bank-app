@@ -1,4 +1,5 @@
 import datetime
+from app.Kantor import Kantor
 
 class Konto:
     oplata_za_przelew_ekspresowy = 1
@@ -48,6 +49,12 @@ class Konto:
             self.saldo -= self.oplata_za_przelew_ekspresowy
             self.historia.append(-self.oplata_za_przelew_ekspresowy)
 
+    def zaksieguj_przelew_przychodzacy_walutowy(self, kwota, waluta):
+        kurs = self.pobierz_kurs_pary_walutowej(waluta, "PLN")
+        kwota_w_pln = kwota * kurs
+        self.saldo += kwota_w_pln
+        self.historia.append(kwota_w_pln) 
+
     def zaciagnij_kredyt(self, kwota):
         if len(self.historia) < 3:
             return False
@@ -61,21 +68,7 @@ class Konto:
         self.saldo += kwota
         return True
 
-    # def zaciagnij_kredyt(self, kwota):
-    #     if self.czy_ostatnie_n_transakcji_byly_wplatami(3) or self.oblicz_sume_ostatnich_n_transakcji(5) > kwota: 
-    #         self.saldo += kwota
-    #         return True
-    #     return False
-        
-    # def czy_ostatnie_n_transakcji_byly_wplatami(self, n):
-    #     if len(self.historia) < n:
-    #         return False
-    #     for ksiegowanie in self.historia[-n:]:
-    #         if ksiegowanie < 0:
-    #             return False
-    #     return True
-
-    # def oblicz_sume_ostatnich_n_transakcji(self, n):
-    #     if len(self.historia) < n:
-    #         return False
-    #     return sum(self.historia[-n:])
+    def wyslij_historie_na_maila(self, adresat, smtp_connection):
+        tresc = f"Twoja historia konta to: {self.historia}"
+        temat = f"Wyciąg z dnia {datetime.datetime.today().strftime('%Y-%m-%d')}"
+        return smtp_connection.wyslij(temat, tresc, adresat)

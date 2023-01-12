@@ -10,11 +10,14 @@ class KontoFirmowe(Konto):
         self.saldo = 0
         self.historia = []
         self.nip = nip if self.czy_poprawny_nip(nip) else "Nieporpwany NIP!"
+        if not self.czy_nip_istnieje_w_gov(nip):
+            return None
 
     def czy_poprawny_nip(self, nip):
-        return len(nip) == 10 and self.czy_nip_istnieje_w_gov(nip)
+        return len(nip) == 10
 
-    def czy_nip_istnieje_w_gov(self, nip):
+    @classmethod
+    def czy_nip_istnieje_w_gov(cls, nip):
         gov_url = os.getenv('BANK_APP_MF_URL', 'https://wl-test.mf.gov.pl/')
         today = datetime.datetime.today().strftime('%Y-%m-%d')
         nip_path = f"{gov_url}api/search/nip/{nip}/?date={today}"
@@ -24,3 +27,8 @@ class KontoFirmowe(Konto):
         if response.status_code == 200:
             return True
         return False
+
+    def wyslij_historie_na_maila(self, adresat, smtp_connection):
+        tresc = f"Historia konta Twojej firmy to: {self.historia}"
+        temat = f"Wyciąg z dnia {datetime.datetime.today().strftime('%Y-%m-%d')}"
+        return smtp_connection.wyslij(temat, tresc, adresat)

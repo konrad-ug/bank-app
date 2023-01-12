@@ -36,11 +36,17 @@ def wyszukaj_konto_z_peselem(pesel):
     konto = RejestrKont.wyszukaj_konto_z_peselem(pesel)
     print(konto)
     if (konto == None):
-        return {"Konto nie zostało znalezione"}, 404
-    return jsonify(imie=konto.imie, nazwisko=konto.nazwisko,saldo=konto.saldo), 200
+        return {"komunikat":"Konto nie zostało znalezione"}, 404
+    return {"imie":konto.imie, "nazwisko":konto.nazwisko,"saldo":konto.saldo}, 200
 
 @app.route("/konta/konto/<pesel>", methods=['DELETE'])
 def usun_konto_z_peselem(pesel):
     print(f"Request o usuniecie z peselem: {pesel}")
-    konto = RejestrKont.usun_konto_z_peselem(pesel)
-    return jsonify("konto usuniete"), 202
+    RejestrKont.usun_konto_z_peselem(pesel)
+    return {"komunikat":"konto usuniete"}, 202
+
+@app.route("/konta/wyczysc", methods=['DELETE'])
+def wyczysc_rejestr():
+    print(f"Request o usuniecie wszystkich kont")
+    RejestrKont.wyczysc_rejestr()
+    return {"komunikat":"Rejest wyczyszczony"}, 202

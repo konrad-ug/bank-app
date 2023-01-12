@@ -28,11 +28,6 @@ class TestObslugaKont(unittest.TestCase):
         self.assertEqual(resp_body["imie"], self.body["imie"])
         self.assertEqual(resp_body["saldo"], 0)
 
-    
-    
-    
-    
-    
     def test_3_usuniecie_konta(self):
         delete_response = requests.delete(self.url + "/konta/konto/" + self.body['pesel'])
         self.assertEqual(delete_response.status_code, 202)
