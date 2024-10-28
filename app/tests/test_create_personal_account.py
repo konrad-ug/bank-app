@@ -32,6 +32,6 @@ class TestCreateBankAccount(unittest.TestCase):
         konto = PersonalAccount(self.imie, self.nazwisko, self.pesel, "PRO_123")
         self.assertEqual(konto.saldo, 0, "Pesel nie został zapisany!")
 
-def test_dobry_kod(self):
+    def test_dobry_kod(self):
         konto = PersonalAccount(self.imie, self.nazwisko, self.pesel, "PROM_123")
         self.assertEqual(konto.saldo, 50, "Pesel nie został zapisany!")

@@ -69,4 +69,11 @@ class TestCreateBankAccount(unittest.TestCase):
         konto.outgoing_express_transfer(150)
         self.assertEqual(konto.saldo, 110, "Saldo nie zostało zmniejszone!")
 
+    def test_outgoing_trasfer_fee_below_0(self):
+        konto = CompanyAccount(self.name, self.nip)
+        konto.saldo = 150
+        konto.outgoing_express_transfer(150)
+        self.assertEqual(konto.saldo, -5, "Saldo nie zostało zmniejszone!")
+
+
    

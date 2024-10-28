@@ -2,7 +2,7 @@ from .Konto import Konto
 
 class PersonalAccount(Konto):
     express_transfer_fee = 1
-    
+
     def __init__(self, imie, nazwisko, pesel, kod_promocyjny=None):
         self.imie = imie
         self.nazwisko = nazwisko
@@ -22,4 +22,3 @@ class PersonalAccount(Konto):
             return True
         return False
     
- 

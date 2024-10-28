@@ -1,6 +1,7 @@
 class Konto:
     saldo = 0
     express_transfer_fee = 0
+    
     def incoming_transfer(self, kwota):
         self.saldo += kwota
 
