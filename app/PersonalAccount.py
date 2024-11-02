@@ -21,6 +21,18 @@ class PersonalAccount(Konto):
             return True
         return False
     
+    def take_loan(self, kwota):
+        if len(self.history) < 3:
+            return 
+        if sum(self.history[-5:]) > kwota:
+            self.saldo += kwota
+            self.history.append(kwota)
+        if self.history[-1] > 0 and self.history[-2] > 0 and self.history[-3] > 0:
+            self.saldo += kwota
+            self.history.append(kwota)
+        
+
+    
 
     
  
