@@ -51,29 +51,29 @@ class TestCreateBankAccount(unittest.TestCase):
         konto.outgoing_transfer(150)
         self.assertEqual(konto.saldo, 110, "Saldo nie zostało zmniejszone!")
 
-    def test_outgoing_company_express_transfer(self):
-        konto = CompanyAccount(self.name, self.nip)
-        konto.saldo = 110
-        konto.outgoing_express_transfer(50)
-        self.assertEqual(konto.saldo, 110-50-5, "Opłata nie została naliczona!")
-
-    def test_outgoing_express_personal_transfer(self):
+    def test_outgoing_express_transfer_personal(self):
         konto = PersonalAccount(self.imie, self.nazwisko, self.pesel)
         konto.saldo = 110
         konto.outgoing_express_transfer(50)
-        self.assertEqual(konto.saldo, 110-50-1, "Opłata nie została naliczona!")
+        self.assertEqual(konto.saldo, 110-50-1, "Saldo nie zostało zmniejszone!")
+
+    def test_outgoing_express_transfer_company(self):
+        konto = CompanyAccount(self.name, self.nip)
+        konto.saldo = 110
+        konto.outgoing_express_transfer(50)
+        self.assertEqual(konto.saldo, 110-50-5, "Saldo nie zostało zmniejszone!")
 
     def test_outgoing_express_transfer_too_much(self):
         konto = CompanyAccount(self.name, self.nip)
         konto.saldo = 110
         konto.outgoing_express_transfer(150)
-        self.assertEqual(konto.saldo, 110, "Saldo nie zostało zmniejszone!")
+        self.assertEqual(konto.saldo, 110, "Saldo nie zostało zmniejszone")
 
-    def test_outgoing_trasfer_fee_below_0(self):
-        konto = CompanyAccount(self.name, self.nip)
+    def test_outgoing_express_transfer_below_0(self):
+        konto = PersonalAccount(self.imie, self.nazwisko, self.pesel)
         konto.saldo = 150
         konto.outgoing_express_transfer(150)
-        self.assertEqual(konto.saldo, -5, "Saldo nie zostało zmniejszone!")
+        self.assertEqual(konto.saldo, 150-150-1, "Saldo nie zostało zmniejszone")
 
 
    
