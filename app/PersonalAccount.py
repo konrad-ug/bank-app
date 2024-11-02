@@ -22,16 +22,17 @@ class PersonalAccount(Konto):
         return False
     
     def take_loan(self, kwota):
-        if len(self.history) < 3:
-            return 
-        if sum(self.history[-5:]) > kwota:
+        if self.is_last_3_transactions_positive() or self.is_sum_of_last_5_transactions_greater_than_loan(kwota):
             self.saldo += kwota
             self.history.append(kwota)
-        if self.history[-1] > 0 and self.history[-2] > 0 and self.history[-3] > 0:
-            self.saldo += kwota
-            self.history.append(kwota)
-        
 
+    def is_last_3_transactions_positive(self):
+        if len(self.history) < 3:
+            return False
+        return self.history[-1] > 0 and self.history[-2] > 0 and self.history[-3] > 0
+        
+    def is_sum_of_last_5_transactions_greater_than_loan(self, loan):
+        return sum(self.history[-5:]) > loan
     
 
     
