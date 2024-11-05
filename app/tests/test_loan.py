@@ -24,3 +24,7 @@ class TestLoan(unittest.TestCase):
         self.konto.history = history
         self.konto.take_loan(loan)
         self.assertEqual(self.konto.saldo, expected, "Saldo nie zostało zwiększone!")
+        if expected > 0:
+            self.assertTrue(self.konto.history[-1] == loan, "Pożyczka nie została dodana do historii!")
+        else:
+            self.assertEqual(self.konto.history, history, "Historia została zmieniona, mimo że nie powinna!")
