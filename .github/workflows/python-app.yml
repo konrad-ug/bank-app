@@ -36,4 +36,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Execute unit tests
       run: |
-        python3 -m unittest
+        python3 -m coverage run -m unittest
+    - name: Check test coverage
+      run: |
+        python3 -m coverage report
