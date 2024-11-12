@@ -22,3 +22,8 @@ class PersonalAccount(Konto):
             return True
         return False
     
+    
+
+    
+ 
+    
