@@ -23,21 +23,21 @@ class PersonalAccount(Konto):
             return True
         return False
     
-    def take_loan(self, kwota):
-        if kwota > 0:
-            self.saldo += kwota
-            return True
-        return False
+    # def take_loan(self, kwota):
+    #     if kwota > 0:
+    #         self.saldo += kwota
+    #         return True
+    #     return False
     
     def take_loan(self, kwota):
         if len(self.history) < 3:
             return False
-        if self.history[-3] > 0 and self.historia[-2] > 0 and self.historia[-1] > 0:
+        if self.history[-3] > 0 and self.history[-2] > 0 and self.history[-1] > 0:
             self.saldo += kwota
             return True
-        if len(self.historia) < 5:
+        if len(self.history) < 5:
             return False
-        if sum(self.historia[-5:]) <= kwota:
+        if sum(self.history[-5:]) <= kwota:
             return False
         self.saldo += kwota
         return True

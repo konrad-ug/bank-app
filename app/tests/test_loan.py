@@ -7,6 +7,9 @@ class TestLoan(unittest.TestCase):
     nazwisko = "Januszewski"
     pesel = "12345678901"
 
+    def setUp(self):
+        self.konto = PersonalAccount(self.imie, self.nazwisko, self.pesel)
+
     def test_empty_history(self):
         self.konto.history = []
         self.konto.take_loan(1000)
@@ -18,7 +21,7 @@ class TestLoan(unittest.TestCase):
         self.assertEqual(self.konto.saldo, 1000, "Saldo zostało zwiększone!")
 
     def test_sum_higher_than_loan(self):
-        self. konto.history = [-4, 5000, -100, 200, -300]
+        self.konto.history = [-4, 5000, -100, 200, -300]
         self.konto.take_loan(1000)
         self.assertEqual(self.konto.saldo, 1000, "Saldo zostało zwiększone!")
 
