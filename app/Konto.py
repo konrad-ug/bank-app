@@ -1,3 +1,5 @@
+import datetime
+
 class Konto:
     saldo = 0
     express_transfer_fee = 0
