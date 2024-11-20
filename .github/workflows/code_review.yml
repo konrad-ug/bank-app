@@ -1,28 +1,20 @@
 name: Code review
 
 on:
-  pull_request:
-    branches: [ "main" ]
-
-permissions:
-  contents: read
-
-jobs:
-  code-review:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pull-requests: write
-    steps:
-    - name: AI Code Review
-      uses: AleksandrFurmenkovOfficial/ai-code-review@v0.4.1
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }} # Token for accessing PRs, file reading, and commenting capabilities
-        openai_api_key: ${{ secrets.OPENAI_API_KEY }} # Access to the GPT-4 class model
-        owner: ${{ github.repository_owner }}
-        repo: ${{ github.event.repository.name }}
-        pr_number: ${{ github.event.number }}
-        include_extensions: ${{ steps.inputs.include_extensions }} # Optional, specify file types to include e.g., ".py,.js,.html"
-        exclude_extensions: ${{ steps.inputs.exclude_extensions }} # Optional, specify file types to exclude
-        include_paths: ${{ steps.inputs.include_paths }} # Optional, specify directories to include
-        exclude_paths: ${{ steps.inputs.exclude_paths }} # Optional, specify directories to exclude
+    pull_request:
+    issue_comment:
+  jobs:
+    pr_agent_job:
+      runs-on: ubuntu-latest
+      permissions:
+        issues: write
+        pull-requests: write
+        contents: write
+      name: Run pr agent on every pull request, respond to user comments
+      steps:
+        - name: PR Agent action step
+          id: pragent
+          uses: Codium-ai/pr-agent@main
+          env:
+            OPENAI_KEY: ${{ secrets.OPEN_AI_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
