@@ -1,3 +1,5 @@
+from app.PersonalAccount import PersonalAccount
+
 class AccountRegistry:
     accounts = []
 
@@ -10,7 +12,7 @@ class AccountRegistry:
         return len(cls.accounts)
     
     @classmethod
-    def get_account_by_pesel(cls, pesel):
+    def get_account_by_pesel(cls, pesel) -> PersonalAccount:
         for account in cls.accounts:
             if account.pesel == pesel:
                 return account
