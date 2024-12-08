@@ -2,17 +2,24 @@ import requests
 import unittest
 
 class TestAccountCrud(unittest.TestCase):
-    url = "http://127.0.0.1:5000/api/accounts"
+    url = "http://127.0.0.1:5002/api/accounts"
     payload = {
         "name": "Dariusz",
         "surname": "Januszewski",
         "pesel": "12345678901"
     }
-    
-    def test_create_account(self):
+
+    def setUp(self):
         response = requests.post(self.url, json=self.payload)
-        assert response.status_code == 201
-        assert response.json()["message"] == "Account created"
+        self.assertEqual(response.status_code, 201)
+
+    def tearDown(self) -> None:
+        response = requests.delete(f"{self.url}/{self.payload['pesel']}")
+        self.assertEqual(response.status_code, 200)
+
+    def test_creating_account_wit_the_same_pesel(self):
+        response = requests.post(self.url, json=self.payload)
+        self.assertEqual(response.status_code, 409)
 
     def test_get_account_by_pesel(self):
         response = requests.get(f"{self.url}/{self.payload['pesel']}")
