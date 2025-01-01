@@ -1,9 +1,12 @@
+from app.SMTPClient import SMTPClient
 from .Konto import Konto
+import datetime
 
 class PersonalAccount(Konto):
     express_transfer_fee = 1
     history = []
-
+    email_text = "Twoja historia konta to: "
+    
     def __init__(self, imie, nazwisko, pesel, kod_promocyjny=None):
         self.imie = imie
         self.nazwisko = nazwisko
@@ -15,6 +18,7 @@ class PersonalAccount(Konto):
             self.saldo = 50
         else:
             self.saldo = 0
+        
 
     def czy_kod_poprawny(self, kod_promocyjny):
         if kod_promocyjny is None:
@@ -60,6 +64,11 @@ class PersonalAccount(Konto):
     #     if len(self.historia) < n:
     #         return False
     #     return sum(self.historia[-n:])
+    
+    # def send_history_to_email(self, email, smtp_client: SMTPClient):
+    #     text = f"Twoja historia konta to: {self.history}"
+    #     subject = f"Wyciąg z dnia {datetime.datetime.now().strftime('%Y-%m-%d')}"
+    #     return smtp_client.send(subject, text, email)
     
 
     
