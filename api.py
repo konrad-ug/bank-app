@@ -13,12 +13,18 @@ def create_account():
         return jsonify({"message": "Konto z takim pesel juz istnieje"}), 409
     konto = PersonalAccount(data["name"], data["surname"], data["pesel"])
     AccountRegistry.add_account(konto)
+    print(f"Account created: {konto.pesel}")
     return jsonify({"message": "Account created"}), 201
+
+@app.route("/api/accounts/count", methods=['GET'])
+def get_account_count():
+    return jsonify({"ilosc_kont_w_rejestrze": AccountRegistry.get_account_count()}), 200
 
 
 @app.route("/api/accounts/<pesel>", methods=['GET'])
 def get_account_by_pesel(pesel):
     account = AccountRegistry.get_account_by_pesel(pesel)
+    print(f"Get account request: {pesel}")
     if account is None:
         return jsonify({"message": "konta brak"}), 404
     return jsonify({
@@ -30,7 +36,14 @@ def get_account_by_pesel(pesel):
 
 @app.route("/api/accounts/<pesel>", methods=['PATCH'])
 def update_account(pesel):
-    #implementacja powinna znaleźć się tutaj
+    data = request.get_json()
+    account = AccountRegistry.get_account_by_pesel(pesel)
+    if account is None:
+        return jsonify({"message": "Account not found"}), 404
+    if "name" in data:
+        account.imie = data["name"]
+    if "surname" in data:
+        account.nazwisko = data["surname"]
     return jsonify({"message": "Account updated"}), 200
 
 
