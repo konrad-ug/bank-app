@@ -3,7 +3,7 @@ import requests
 from unittest_assertions import AssertEqual
 
 assert_equal = AssertEqual()
-URL = "http://localhost:5000"
+URL = "http://localhost:5004"
 
 @when('I create an account using name: "{name}", last name: "{last_name}", pesel: "{pesel}"')
 def create_account(context, name, last_name, pesel):
@@ -16,11 +16,14 @@ def create_account(context, name, last_name, pesel):
 
 @step('Number of accounts in registry equals: "{count}"')
 def is_account_count_equal_to(context, count):
-    #TODO
+    response = requests.get(URL + "/api/accounts/count")
+    assert_equal(response.status_code, 200)
+    assert_equal(response.json()["ilosc_kont_w_rejestrze"], int(count))
 
 @step('Account with pesel "{pesel}" exists in registry')
 def check_account_with_pesel_exists(context, pesel):
-    #TODO
+    response = requests.get(URL + f"/api/accounts/{pesel}")
+    assert_equal(response.status_code, 200)
 
 @step('Account with pesel "{pesel}" does not exist in registry')
 def check_account_with_pesel_does_not_exist(context, pesel):
@@ -29,7 +32,8 @@ def check_account_with_pesel_does_not_exist(context, pesel):
 
 @when('I delete account with pesel: "{pesel}"')
 def delete_account(context, pesel):
-    #TODO
+    response = requests.delete(URL + f"/api/accounts/{pesel}")
+    assert_equal(response.status_code, 200)
 
 @when('I update "{field}" of account with pesel: "{pesel}" to "{value}"')
 def update_field(context, field, pesel, value):
@@ -41,4 +45,6 @@ def update_field(context, field, pesel, value):
 
 @then('Account with pesel "{pesel}" has "{field}" equal to "{value}"')
 def field_equals_to(context, pesel, field, value):
-    #TODO
+    response = requests.get(URL + f"/api/accounts/{pesel}")
+    assert_equal(response.status_code, 200)
+    assert_equal(response.json()[field], value)
