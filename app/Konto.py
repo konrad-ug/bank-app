@@ -1,5 +1,4 @@
 import datetime
-
 from app.SMTPClient import SMTPClient
 class Konto:
     saldo = 0
@@ -31,3 +30,4 @@ class Konto:
         subject = "Wyciąg z dnia " + datetime.datetime.now().strftime('%Y-%m-%d')
         text = self.email_text + str(self.history)
         return smtp_client.send(subject, text, email)
+
