@@ -7,7 +7,7 @@ class PerfTest(unittest.TestCase):
         "surname": "Januszewski",
         "pesel":"12345678901"
     }
-    url = "http://localhost:5004/api/accounts"
+    url = "http://localhost:5000/api/accounts"
     iteration_count = 100
     timeout = 0.5
 
