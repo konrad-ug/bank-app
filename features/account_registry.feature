@@ -20,7 +20,7 @@ Feature: Account registry
  Scenario: User is able to update surname of already created account
     Given Account with pesel "89092909876" exists in registry
     When I update "surname" of account with pesel: "89092909876" to "brand"
-    Then Account with pesel "89092909876" has "last name" equal to "brand"
+    Then Account with pesel "89092909876" has "surname" equal to "brand"
 
  Scenario: User is able to delete already created account
    Given Account with pesel "89092909876" exists in registry
