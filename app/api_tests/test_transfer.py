@@ -2,7 +2,7 @@ import requests
 import unittest
 
 class TestAccountCrud(unittest.TestCase):
-    url = "http://127.0.0.1:5000/api/accounts"
+    url = "http://127.0.0.1:5004/api/accounts"
     payload = {
         "name": "Dariusz",
         "surname": "Januszewski",

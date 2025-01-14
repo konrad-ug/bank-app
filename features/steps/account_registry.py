@@ -3,7 +3,7 @@ import requests
 from unittest_assertions import AssertEqual
 
 assert_equal = AssertEqual()
-URL = "http://localhost:5004"
+URL = "http://localhost:5000"
 
 @when('I create an account using name: "{name}", last name: "{last_name}", pesel: "{pesel}"')
 def create_account(context, name, last_name, pesel):
