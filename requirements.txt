@@ -1,5 +1,5 @@
 coverage==6.5.0
 parameterized==0.8.1
-flask==1.1.1
+flask==2.1.1
 behave==1.2.6
 requests==2.22.0
