@@ -1,5 +1,5 @@
 from typing import Union
-from Konto import Konto
+from Konto import PersonalAccount
 from fastapi import FastAPI, Request, Body
 from pydantic import BaseModel
 app = FastAPI()

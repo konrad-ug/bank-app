@@ -1,6 +1,6 @@
-from app.Konto import Konto
+from app.Konto import PersonalAccount
 
-class KontoFirmowe(Konto):
+class KontoFirmowe(PersonalAccount):
     oplata_za_przelew_ekspresowy = 5
 
     def __init__(self, nazwa_firmy, nip):
