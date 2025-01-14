@@ -22,11 +22,10 @@ class TestSendHistoryToEmail(unittest.TestCase):
    
        
     def test_example_magick_mock(self):
-        
-        
+        smtp_client = SMTPClient()
         konto = PersonalAccount(self.imie, self.nazwisko, self.pesel)
         konto.history = self.expected_history
-        result = konto.send_history_to_email(self.email)
+        result = konto.send_history_to_email(self.email, smtp_client)
         self.assertTrue(result)
         # smtp_client.send.assert_called_once()
         # smtp_client.send.assert_called_with(self.expected_email_subject, self.expected_email_text, self.email)

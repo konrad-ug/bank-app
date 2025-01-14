@@ -1,8 +1,8 @@
 from app.SMTPClient import SMTPClient
-from .Konto import Konto
+from .Konto import PersonalAccount
 import datetime
 
-class PersonalAccount(Konto):
+class PersonalAccount(PersonalAccount):
     express_transfer_fee = 1
     history = []
     email_text = "Twoja historia konta to: "

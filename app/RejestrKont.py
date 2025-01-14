@@ -1,4 +1,4 @@
-from app.Konto import Konto
+from app.Konto import PersonalAccount
 
 class RejestrKont():
     lista = []

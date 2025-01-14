@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 from app.RejestrKont import RejestrKont
-from app.Konto import Konto
+from app.Konto import PersonalAccount
 
 app = Flask(__name__)
 
@@ -10,7 +10,7 @@ def stworz_konto():
     print(f"Request o stworzenie konta z danymi: {dane}")
     if RejestrKont.wyszukaj_konto_z_peselem(dane["pesel"]) != None:
         return jsonify("Konto z podanym peselem juz istnieje"), 400
-    konto = Konto(dane["imie"], dane["nazwisko"], dane["pesel"])
+    konto = PersonalAccount(dane["imie"], dane["nazwisko"], dane["pesel"])
     RejestrKont.dodaj_konto(konto)
     return jsonify("Konto stworzone"), 201
 

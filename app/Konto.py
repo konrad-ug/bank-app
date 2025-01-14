@@ -1,6 +1,6 @@
 import datetime
 from app.SMTPClient import SMTPClient
-class Konto:
+class PersonalAccount:
     saldo = 0
     express_transfer_fee = 0
     history = []
@@ -26,8 +26,8 @@ class Konto:
             return True
         return False
     
-    def send_history_to_email(self, email):
+    def send_history_to_email(self, email, smtp_client: SMTPClient):
         subject = "Wyciąg z dnia " + datetime.datetime.now().strftime('%Y-%m-%d')
         text = self.email_text + str(self.history)
-        # return smtp_client.send(subject, text, email)
+        return smtp_client.send(subject, text, email)
 
