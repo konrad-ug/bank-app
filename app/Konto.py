@@ -29,5 +29,5 @@ class Konto:
     def send_history_to_email(self, email):
         subject = "Wyciąg z dnia " + datetime.datetime.now().strftime('%Y-%m-%d')
         text = self.email_text + str(self.history)
-        return smtp_client.send(subject, text, email)
+        # return smtp_client.send(subject, text, email)
 
